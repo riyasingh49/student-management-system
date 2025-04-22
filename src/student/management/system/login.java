@@ -4,11 +4,13 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -75,7 +77,25 @@ public class login extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == login){
+            try {
+                String username = tusername.getText();
+                String password = tpassword.getSelectedText();
 
+                conn conn = new conn();
+                String query = "select * from login where username = '"+ username +"' and password = '"+password+"'"; 
+                ResultSet resultSet = conn.statement.executeQuery(query);
+                if(resultSet.next()){
+                    setVisible(false);
+                    new main_class();
+                }else{
+
+                    JOptionPane.showMessageDialog(null, "Invalid username or password");
+                }
+                
+            } catch (Exception E) {
+               
+                E.printStackTrace();
+            }
         }else{
             System.exit(49);
         }
