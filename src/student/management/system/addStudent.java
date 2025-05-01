@@ -2,18 +2,23 @@ package student.management.system;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
-public class addStudent extends JFrame {
+public class addStudent extends JFrame implements ActionListener{
     JTextField tname, tfname, tcourse, tbranch, tyear, trollno, taddress, tphone, temail;
     JDateChooser tdob;
     JComboBox branchBox;
+    JButton add,back;
 
 
     addStudent(){
@@ -69,12 +74,11 @@ public class addStudent extends JFrame {
         branch.setFont(new Font("Sans serif",Font.BOLD,15));
         add(branch);
 
-        
-
-        JTextField tbranch = new JTextField();
-        tbranch.setBounds(250, 250, 150, 30);
-        tbranch.setBackground(new Color(203,215,188));
-        add(tbranch);
+        String[] branches = {"SELECT","CSE","IT","MECHANICAL","CIVIL","ELECTRICAL","ECE","CHEMICAL","BIO-MEDICAL","OTHER"};
+        branchBox = new JComboBox(branches);
+        branchBox.setBounds(250, 250, 150, 30);
+        branchBox.setBackground(new Color(203, 225, 185));
+        add(branchBox);
 
         JLabel year = new JLabel("Current year");
         year.setBounds(500, 250, 150, 30);
@@ -106,12 +110,74 @@ public class addStudent extends JFrame {
         taddress.setBackground(new Color(203,215,188));
         add(taddress);
 
-        setSize(900, 700);
+        JLabel email = new JLabel("Email");
+        email.setBounds(70, 350, 150, 30);
+        email.setFont(new Font("Sans serif",Font.BOLD,15));
+        add(email);
+
+        JTextField temail = new JTextField();
+        temail.setBounds(250, 350, 150, 30);
+        temail.setBackground(new Color(203,215,188));
+        add(temail);
+
+        JLabel phone = new JLabel("Phone Number");
+        phone.setBounds(500, 350, 150, 30);
+        phone.setFont(new Font("Sans serif",Font.BOLD,15));
+        add(phone);
+
+        JTextField tphone = new JTextField();
+        tphone.setBounds(650, 350, 150, 30);
+        tphone.setBackground(new Color(203,215,188));
+        add(tphone);
+
+        add = new JButton("ADD");
+        add.setBounds(250, 450, 150, 40);
+        add.setForeground(Color.black);
+        add.addActionListener(this);
+        add(add);
+
+        back = new JButton("BACK");
+        back.setBounds(450, 450, 150, 40);
+        back.setForeground(Color.black);
+        back.addActionListener(this);
+        add(back);
+
+
+        setSize(900, 650);
         setLayout(null);
         setLocation(200,50);
         setVisible(true);
     }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == add){
+            String name = tname.getText();
+            String fname = tfname.getText();
+            String dob = ((JTextField)tdob.getDateEditor().getUiComponent()).getText();
+            String course = tcourse.getText();
+            String branch = (String) branchBox.getSelectedItem();
+            String year = tyear.getText();
+            String rollno = trollno.getText();
+            String address = taddress.getText();
+            String email = temail.getText();
+            String phone = tphone.getText();
+
+            try {
+                conn c = new conn();
+                String query = "insert into student values('"+name+"','"+fname+"','"+dob+"','"+course+"','"+branch+"','"+year+"','"+rollno+"','"+address+"','"+email+"','"+phone+"')";
+                c.statement.executeUpdate(query);
+                JOptionPane.showMessageDialog(null, "Details Added Successfully!");
+                setVisible(false);
+                new main_class();
+
+            } catch (Exception E) {
+                E.printStackTrace();
+                 }
+        }
+    }
     public static void main(String[] args) {
         new addStudent();
     }
+   
 }
