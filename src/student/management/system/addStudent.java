@@ -7,8 +7,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import com.toedter.calendar.JDateChooser;
+
 public class addStudent extends JFrame {
-    JTextField tname, tfname, tcourse, tbranch, tyear, trollno, taddress, tphone, temail, tdob;
+    JTextField tname, tfname, tcourse, tbranch, tyear, trollno, taddress, tphone, temail;
+    JDateChooser tdob;
 
     addStudent(){
         getContentPane().setBackground(new Color(203,215,188));
@@ -24,7 +27,7 @@ public class addStudent extends JFrame {
         add(name);
 
         JTextField tname = new JTextField();
-        tname.setBounds(170, 150, 150, 30);
+        tname.setBounds(250, 150, 150, 30);
         tname.setBackground(new Color(203, 215, 188));
         add(tname);
 
@@ -37,6 +40,16 @@ public class addStudent extends JFrame {
         tfname.setBounds(650, 150, 150, 30);
         tfname.setBackground(new Color(203, 215, 188));
         add(tfname);
+
+        JLabel dob = new JLabel("Date of Birth");
+        dob.setBounds(70, 200,150 , 30);
+        dob.setFont(new Font("San serif", Font.BOLD,20));
+        add(dob);
+
+        tdob = new JDateChooser();
+        tdob.setBounds(250, 200, 150, 30);
+        tdob.setBackground(new Color(203, 215, 188));
+        add(tdob);
 
         setSize(900, 700);
         setLayout(null);
