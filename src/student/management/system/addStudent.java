@@ -34,7 +34,7 @@ public class addStudent extends JFrame implements ActionListener{
         name.setFont(new Font("San serif", Font.BOLD,15));
         add(name);
 
-        JTextField tname = new JTextField();
+        tname = new JTextField();
         tname.setBounds(250, 150, 150, 30);
         tname.setBackground(new Color(203, 215, 188));
         add(tname);
@@ -44,7 +44,7 @@ public class addStudent extends JFrame implements ActionListener{
         fname.setFont(new Font("San serif", Font.BOLD,15));
         add(fname);
 
-        JTextField tfname = new JTextField();
+        tfname = new JTextField();
         tfname.setBounds(650, 150, 150, 30);
         tfname.setBackground(new Color(203, 215, 188));
         add(tfname);
@@ -64,7 +64,7 @@ public class addStudent extends JFrame implements ActionListener{
         course.setFont(new Font("San serif", Font.BOLD,15));
         add(course);
 
-        JTextField tcourse = new JTextField();
+        tcourse = new JTextField();
         tcourse.setBounds(650, 200, 150, 30);
         tcourse.setBackground(new Color(203, 215, 188));
         add(tcourse);
@@ -85,7 +85,7 @@ public class addStudent extends JFrame implements ActionListener{
         year.setFont(new Font("Sans serif", Font.BOLD, 15));
         add(year);
 
-        JTextField tyear = new JTextField();
+        tyear = new JTextField();
         tyear.setBounds(650, 250, 150, 30);
         tyear.setBackground(new Color(203,215,188));
         add(tyear);
@@ -95,7 +95,7 @@ public class addStudent extends JFrame implements ActionListener{
         rollno.setFont(new Font("Sans serif", Font.BOLD,15));
         add(rollno);
 
-        JTextField trollno = new JTextField();
+        trollno = new JTextField();
         trollno.setBounds(250, 300, 150, 30);
         trollno.setBackground(new Color(203,215,188));
         add(trollno);
@@ -105,7 +105,7 @@ public class addStudent extends JFrame implements ActionListener{
         address.setFont(new Font("Sans serif",Font.BOLD,15));
         add(address);
 
-        JTextField taddress = new JTextField();
+        taddress = new JTextField();
         taddress.setBounds(650, 300, 150, 30);
         taddress.setBackground(new Color(203,215,188));
         add(taddress);
@@ -115,7 +115,7 @@ public class addStudent extends JFrame implements ActionListener{
         email.setFont(new Font("Sans serif",Font.BOLD,15));
         add(email);
 
-        JTextField temail = new JTextField();
+        temail = new JTextField();
         temail.setBounds(250, 350, 150, 30);
         temail.setBackground(new Color(203,215,188));
         add(temail);
@@ -125,7 +125,7 @@ public class addStudent extends JFrame implements ActionListener{
         phone.setFont(new Font("Sans serif",Font.BOLD,15));
         add(phone);
 
-        JTextField tphone = new JTextField();
+        tphone = new JTextField();
         tphone.setBounds(650, 350, 150, 30);
         tphone.setBackground(new Color(203,215,188));
         add(tphone);
@@ -164,9 +164,9 @@ public class addStudent extends JFrame implements ActionListener{
             String phone = tphone.getText();
 
             try {
-                conn c = new conn();
+                conn conn = new conn();
                 String query = "insert into student values('"+name+"','"+fname+"','"+dob+"','"+course+"','"+branch+"','"+year+"','"+rollno+"','"+address+"','"+email+"','"+phone+"')";
-                c.statement.executeUpdate(query);
+                conn.statement.executeUpdate(query);
                 JOptionPane.showMessageDialog(null, "Details Added Successfully!");
                 setVisible(false);
                 new main_class();

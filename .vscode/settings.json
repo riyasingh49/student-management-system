@@ -1,12 +1,8 @@
 {
-    "java.project.referencedLibraries": {
-        "include": [
-            "lib/**/*.jar",
-            "/Users/riyasingh/Documents/Projects/mysql-connector-j-9.3.0/**/*.jar",
-            "/Users/riyasingh/Documents/Projects/jar files/jcalendar-1/**/*.jar"
-        ],
-        "exclude": [
-            "/Users/riyasingh/Documents/Projects/jar files/jcalendar-1/lib/jgoodies-looks-2.4.1.jar"
-        ]
-    }
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "/Users/riyasingh/Documents/Projects/mysql-connector-j-9.3.0/**/*.jar",
+        "/Users/riyasingh/Documents/Projects/jar files/jcalendar-1/**/*.jar",
+        "/Users/riyasingh/Documents/Projects/jar files/mysql-connector-j-9.3.0/**/*.jar"
+    ]
 }
