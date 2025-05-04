@@ -1,16 +1,23 @@
 package student.management.system;
 import java.awt.Choice;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import net.proteanit.sql.DbUtils;
 
-public class view_class extends JFrame{
+
+public class view_class extends JFrame implements ActionListener{
     Choice sturollno;
     JTable table;
+    JButton print, back, searchbtn, update;
     view_class(){
 
         setSize(900,650);
@@ -45,9 +52,32 @@ public class view_class extends JFrame{
             e.printStackTrace();       
         }
 
+        JScrollPane jp = new JScrollPane(table);
+        jp.setBounds(0, 100, 900, 650);
+        add(jp);
+
+        searchbtn = new JButton("Search");
+        searchbtn.setBounds(30, 70, 80, 30);
+        add(searchbtn);
+        
+        print = new JButton("Print");
+        print.setBounds(130, 70, 80, 30);
+        add(print);
+
+        back = new JButton("Back");
+        back.setBounds(230, 70, 80, 30);
+        add(back);
+
+        update = new JButton("Update");
+        update.setBounds(330, 70, 80, 30);
+        add(update);
     }
     public static void main(String[] args) {
         new view_class();
         
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+       
     }
 }
