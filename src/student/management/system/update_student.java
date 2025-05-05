@@ -1,27 +1,27 @@
 package student.management.system;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
-public class addStudent extends JFrame implements ActionListener{
+public class update_student extends JFrame implements ActionListener{
     JTextField tname, tfname, tcourse, tbranch, tyear, trollno, taddress, tphone, temail;
+    JButton add,back;
     JDateChooser tdob;
     JComboBox branchBox;
-    JButton add,back;
+    // String number;
+    update_student (String number){
 
-
-    addStudent(){
         getContentPane().setBackground(new Color(203,215,188));
 
         JLabel heading = new JLabel("Add Student Detail");
@@ -34,7 +34,7 @@ public class addStudent extends JFrame implements ActionListener{
         name.setFont(new Font("San serif", Font.BOLD,15));
         add(name);
 
-        tname = new JTextField();
+        JLabel tname = new JLabel();
         tname.setBounds(250, 150, 150, 30);
         tname.setBackground(new Color(203, 215, 188));
         add(tname);
@@ -54,10 +54,10 @@ public class addStudent extends JFrame implements ActionListener{
         dob.setFont(new Font("San serif", Font.BOLD,15));
         add(dob);
 
-        tdob = new JDateChooser();
-        tdob.setBounds(250, 200, 150, 30);
-        tdob.setBackground(new Color(203, 215, 188));
-        add(tdob);
+       JLabel tdob = new JLabel();
+       tdob.setBounds(250, 200, 150, 30);
+       dob.setFont(new Font("Sans serif",Font.BOLD,15));
+       add(tdob);
 
         JLabel course = new JLabel("Course");
         course.setBounds(500, 200, 150, 30);
@@ -74,11 +74,10 @@ public class addStudent extends JFrame implements ActionListener{
         branch.setFont(new Font("Sans serif",Font.BOLD,15));
         add(branch);
 
-        String[] branches = {"SELECT","CSE","IT","MECHANICAL","CIVIL","ELECTRICAL","ECE","CHEMICAL","BIO-MEDICAL","OTHER"};
-        branchBox = new JComboBox(branches);
-        branchBox.setBounds(250, 250, 150, 30);
-        branchBox.setBackground(new Color(203, 225, 185));
-        add(branchBox);
+        tbranch = new JTextField();
+        tbranch.setBounds(250, 250, 150, 30);
+        tbranch.setBackground(new Color(203, 215, 188));
+        add(tbranch);
 
         JLabel year = new JLabel("Current year");
         year.setBounds(500, 250, 150, 30);
@@ -95,7 +94,7 @@ public class addStudent extends JFrame implements ActionListener{
         rollno.setFont(new Font("Sans serif", Font.BOLD,15));
         add(rollno);
 
-        trollno = new JTextField();
+        JLabel trollno = new JLabel();
         trollno.setBounds(250, 300, 150, 30);
         trollno.setBackground(new Color(203,215,188));
         add(trollno);
@@ -130,7 +129,29 @@ public class addStudent extends JFrame implements ActionListener{
         tphone.setBackground(new Color(203,215,188));
         add(tphone);
 
-        add = new JButton("ADD");
+        try {
+            conn c = new conn();
+            String query = "select * from student where rollno = '"+number+"'";
+            ResultSet resultSet = c.statement.executeQuery(query);
+            while(resultSet.next()){
+                tname.setText(resultSet.getString("name"));
+                tfname.setText(resultSet.getString("fname"));
+                tdob.setText(resultSet.getString("dob"));
+                tcourse.setText(resultSet.getString("course"));
+                tbranch.setText(resultSet.getString("branch"));
+                tyear.setText(resultSet.getString("year"));
+                trollno.setText(resultSet.getString("rollno"));
+                taddress.setText(resultSet.getString("address"));
+                temail.setText(resultSet.getString("email"));
+                tphone.setText(resultSet.getString("phone"));
+
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+                }
+
+        add = new JButton("UPDATE");
         add.setBounds(250, 450, 150, 40);
         add.setForeground(Color.black);
         add.addActionListener(this);
@@ -139,7 +160,7 @@ public class addStudent extends JFrame implements ActionListener{
         back = new JButton("BACK");
         back.setBounds(450, 450, 150, 40);
         back.setForeground(Color.black);
-        back.addActionListener(this);
+        back.addActionListener( this);
         add(back);
 
 
@@ -147,42 +168,14 @@ public class addStudent extends JFrame implements ActionListener{
         setLayout(null);
         setLocation(200,50);
         setVisible(true);
-    }
     
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == add){
-            String name = tname.getText();
-            String fname = tfname.getText();
-            String dob = ((JTextField)tdob.getDateEditor().getUiComponent()).getText();
-            String course = tcourse.getText();
-            String branch = (String) branchBox.getSelectedItem();
-            String year = tyear.getText();
-            String rollno = trollno.getText();
-            String address = taddress.getText();
-            String email = temail.getText();
-            String phone = tphone.getText();
-
-            try {
-                conn conn = new conn();
-                String query = "insert into student values('"+name+"','"+fname+"','"+dob+"','"+course+"','"+branch+"','"+year+"','"+rollno+"','"+address+"','"+email+"','"+phone+"')";
-                conn.statement.executeUpdate(query);
-                JOptionPane.showMessageDialog(null, "Details Added Successfully!");
-                setVisible(false);
-                new main_class();
-
-            } catch (Exception E) {
-                E.printStackTrace();
-                 }
-        }
-        else{
-            setVisible(false);
-            new main_class();
-        }
     }
     public static void main(String[] args) {
-        new addStudent();
+        new update_student("");
     }
-   
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+    }
 }

@@ -38,8 +38,8 @@ public class main_class extends JFrame {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
-                
+                new addStudent();
+                setVisible(false);
             }
         });
         img.add(button);
@@ -55,8 +55,8 @@ public class main_class extends JFrame {
         view.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-              
-                
+                new view_class();
+                setVisible(false);
             }
         });
         img.add(view);
@@ -72,8 +72,7 @@ public class main_class extends JFrame {
         rem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
-                
+
             }
         });
         img.add(rem);
