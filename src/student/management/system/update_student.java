@@ -10,13 +10,14 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
 public class update_student extends JFrame implements ActionListener{
     JTextField tname, tfname, tcourse, tbranch, tyear, trollno, taddress, tphone, temail;
-    JButton add,back;
+    JButton update,back;
     JDateChooser tdob;
     JComboBox branchBox;
     // String number;
@@ -151,11 +152,11 @@ public class update_student extends JFrame implements ActionListener{
             e.printStackTrace();
                 }
 
-        add = new JButton("UPDATE");
-        add.setBounds(250, 450, 150, 40);
-        add.setForeground(Color.black);
-        add.addActionListener(this);
-        add(add);
+        update = new JButton("UPDATE");
+        update.setBounds(250, 450, 150, 40);
+        update.setForeground(Color.black);
+        update.addActionListener(this);
+        add(update);
 
         back = new JButton("BACK");
         back.setBounds(450, 450, 150, 40);
@@ -175,7 +176,29 @@ public class update_student extends JFrame implements ActionListener{
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == update){
+            String fname = tfname.getText();
+            String course = tcourse.getText();
+            String branch = tbranch.getText();
+            String year = tyear.getText();
+            String address = taddress.getText();
+            String email = temail.getText();
+            String phone = tphone.getText();
+            String rollno = trollno.getText();
 
-        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+            try {
+                conn c = new conn();
+                String query = "update student set fname = '"+fname+"', course = '"+course+"', branch = '"+branch+ "', year = '"+year+"', address = '"+address+"',email = '"+email+"', phone = '"+phone+"' where rollno = '"+rollno+"'";
+                c.statement.executeUpdate(query);
+                JOptionPane.showMessageDialog(null, "Details updated Successfully!");
+                setVisible(false);
+                new view_class();
+            } catch (Exception E) {
+                E.printStackTrace();
+            }
+        }else{
+            setVisible(false);
+            new view_class();
+        }
     }
 }

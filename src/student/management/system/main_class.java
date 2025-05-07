@@ -72,7 +72,8 @@ public class main_class extends JFrame {
         rem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new removeStudent();
+                setVisible(false);
             }
         });
         img.add(rem);

@@ -95,7 +95,7 @@ public class addStudent extends JFrame implements ActionListener{
         rollno.setFont(new Font("Sans serif", Font.BOLD,15));
         add(rollno);
 
-        trollno = new JTextField();
+        trollno = new JTextField(30);
         trollno.setBounds(250, 300, 150, 30);
         trollno.setBackground(new Color(203,215,188));
         add(trollno);
