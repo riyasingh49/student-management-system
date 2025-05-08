@@ -16,13 +16,15 @@ import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
 public class update_student extends JFrame implements ActionListener{
-    JTextField tname, tfname, tcourse, tbranch, tyear, trollno, taddress, tphone, temail;
+    JTextField tname, tfname, tcourse, tbranch, tyear, taddress, tphone, temail;
+    JLabel trollno;
     JButton update,back;
     JDateChooser tdob;
     JComboBox branchBox;
-    // String number;
+    String number;
     update_student (String number){
 
+        this.number = number;
         getContentPane().setBackground(new Color(203,215,188));
 
         JLabel heading = new JLabel("Add Student Detail");
@@ -95,7 +97,7 @@ public class update_student extends JFrame implements ActionListener{
         rollno.setFont(new Font("Sans serif", Font.BOLD,15));
         add(rollno);
 
-        JLabel trollno = new JLabel();
+        trollno = new JLabel();
         trollno.setBounds(250, 300, 150, 30);
         trollno.setBackground(new Color(203,215,188));
         add(trollno);
@@ -188,7 +190,7 @@ public class update_student extends JFrame implements ActionListener{
 
             try {
                 conn c = new conn();
-                String query = "update student set fname = '"+fname+"', course = '"+course+"', branch = '"+branch+ "', year = '"+year+"', address = '"+address+"',email = '"+email+"', phone = '"+phone+"' where rollno = '"+rollno+"'";
+                String query = "update student set fname = '"+fname+"', course = '"+course+"', branch = '"+branch+ "', year = '"+year+"', address = '"+address+"',email = '"+email+"', phone = '"+phone+"' where rollno = '"+number+"'";
                 c.statement.executeUpdate(query);
                 JOptionPane.showMessageDialog(null, "Details updated Successfully!");
                 setVisible(false);
